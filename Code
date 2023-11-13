@@ -1,0 +1,285 @@
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+//global
+int i;
+int temp;
+int row,col;
+const int sizeRow=4;
+const int sizeCol=5;
+
+//function
+char getMenu(char ans);//returns the correct choice otherwise returns -1 if not.
+void getInput(int list[],int dim);//input for both option 1 and 2
+void getBubble(int list[],int dim);//perform the bubble sorting
+void getSelect(int list[],int dim);//perform the selection sorting
+void convert2DimSort(int list[],int dim);//convert one dimensional to 2-dimensional for both option 1 and 2
+void get2DOut(int list1[][sizeCol]);//displaying the values in ascending and descending order 2-D
+void getHeap(int list3[],int dimen);//process heapyfication or heap sort 1-D
+void tryAgain();//reruns the program
+
+int main()
+{
+    //add code here
+    //=========== DECLARATION OF VARIABLES============
+    char choice;     
+    char sagot; 
+    int size = 20;
+	int xsize = 10;
+	int arr[size];  
+
+    //=========== EXECUTABLE PROCESS============
+    do
+    {
+        //add code here
+        cout<<"------------SORTING-----------" << endl;      
+        cout<<"[1]bubble sort" << endl;        
+        cout<<"[2]selection sort" << endl;        
+        cout<<"[3]heap sort" << endl;         
+        cout<<"[4]QUIT" << endl;        
+        cout<<"------------------------------" << endl;        
+
+        cout<<"Enter your choice: ";         
+        cin>>choice;         
+        sagot=getMenu(choice);     
+
+        system("cls"); 
+
+        switch(sagot)
+        {
+            case '1'://=========== BUBBLE SORT ============
+            {
+                //add code here
+                cout<<"Processing Bubble Sorting Technique..."<<endl;
+                cout<<endl;    
+                    
+                //call getInput function
+                getInput(arr, size);	
+                    
+                //call getBubble function
+                getBubble(arr, size);
+                    
+                //call convert2DimSort
+                convert2DimSort(arr, size); 
+            }//end-main-case1
+            break;
+            
+
+            case '2'://=========== SELECTION SORT ============
+            {
+                //add code here
+                cout<<"Processing Selection Sorting Technique..."<<endl;
+                cout<<endl; 
+                    
+                //call getInput function
+                getInput(arr, size);
+                    
+                //call getSelect function
+                getSelect(arr, size); 
+                    
+                //call convert2DimSort
+                convert2DimSort(arr, size);
+            }//end-main-case2
+            break;
+                
+            case '3'://=========== HEAP SORT ============
+            {
+                //add code here
+                cout<<"\nProcessing Heap Sorting Technique...\n";             
+                int size =10;             
+                int arr[size];             
+                cout<<"Enter 10 numbers\n";             
+                for(int i=0; i<size; i++)             
+                {                 
+                    cout<<"Enter Value of list["<<i+1<<"] :";                 
+                    cin>>arr[i];             
+                }
+
+                getHeap(arr,size);
+                cout<<endl<<"Heapyfied values ..."<<endl;
+                    
+                //add code here
+                for(int i=0; i<size; i++)             
+                {                 
+                    cout<<"Arr["<<i+1<<"]: "<<arr[i]<<"\n";              
+                }   
+            }//end-main-case3
+            break;
+                
+            case '4': ///========== QUIT =====================
+            cout<<"end of program.....\n";
+            {
+                exit(1);
+            }//end-main-case4
+        }//end-main-switch
+        tryAgain();    
+    }
+    while(true); 
+}//end-int-main
+
+
+/////////////////////////////////// GETMENU ///////////////////////////////////////////
+char getMenu(char ans)
+{
+    //add code here
+    if(ans>='1' && ans<='4')    
+    {      
+        return ans;     
+    }//end-if
+        
+    else     
+    {        
+        return -1;    
+    }//end-else
+}//end-char-getMenu
+    
+/////////////////////////////////// GETINPUT ///////////////////////////////////////////
+void getInput(int list[],int dim)// for both option 1 and 2 only
+{
+    //add code here
+    cout<<"enter "<<dim<<" elements\n";     
+    for(int row=0; row<dim; row++)    
+    {         
+        cout<<"loc["<<row<<"]: ";        
+        cin>>list[row];     
+    }//end-for
+    system("cls"); 
+}//end-void-getInput
+    
+/////////////////////////////////// CONVERT2DIMSORT ///////////////////////////////////////////
+void convert2DimSort(int list[],int dim)
+{
+    //add code here
+    int inList[sizeRow][sizeCol];      
+    int a=0;     
+    for (int row=0; row<sizeRow; row++)     
+    {   
+        for(int col=0; col<sizeCol; col++)         
+        {  
+            inList[row][col] = list[a++];        
+        }//end-for2
+    }//end-for1
+    get2DOut(inList);
+}//end-void-convert2DimSort
+    
+/////////////////////////////////// GET2DOUT ///////////////////////////////////////////
+void get2DOut(int list1[][sizeCol])
+{
+    cout<<"Ascending Order\n";
+    //add code here
+    for(int row=0; row<sizeRow; row++)     
+    {         
+        for(int col=0; col<sizeCol; col++)         
+        {             
+            cout<<"\t"<<list1[row][col];         
+        }//end-for2    
+        cout<<"\n";    
+    }//end-for1
+    
+    cout<<"\nDescending Order\n";
+    //add code here
+    for(int row=sizeRow-1; row>=0; row--)     
+    {         
+        for(int col=sizeCol-1; col>=0; col--)         
+        {       
+            cout<<"\t"<<list1[row][col];        
+        }//end-for2   
+        cout<<"\n";     
+    }//end-for1
+}//end-void-get2DOut
+
+/////////////////////////////////// GETBUBBLE ///////////////////////////////////////////
+void getBubble(int list[],int dim)
+{
+    //solution to bubble sort
+    //add code here
+    for(int row=0; row<dim-1; row++)     
+    {         
+        for(int col=0; col<dim-i-1; col++)         
+        {             
+            if(list[col]>list[col+1])             
+            {                 
+                int temp = list[col+1];                 
+                list[col+1]=list[col];                 
+                list[col]=temp;             
+            }//end-if      
+        }//end-for2
+    }//end-for1
+    system("cls");
+}//end-void-getBubble
+    
+/////////////////////////////////// GETSELECT ///////////////////////////////////////////
+void getSelect(int list[],int dim)
+{
+    //solution to selection sort
+    //add code here
+    for(int row=0; row<dim; row++)     
+    {         
+        int minm = row;         
+        for(int col=row+1; col<dim; col++)         
+        {             
+            if(list[col]<list[minm])             
+            {                 
+                minm=col;             
+            }//end-if       
+    
+        }//end-for2       
+        int temp = list[minm];         
+        list[minm]=list[row];         
+        list[row]=temp;    
+    }//end-for1
+    system("cls");
+}//end-void-getSelect
+    
+/////////////////////////////////// GETHEAP ///////////////////////////////////////////
+void getHeap(int list3[],int dimen)
+{
+    //add code here
+    for(int left=1, right=2, index=0; index<dimen; index++, left+=2, right+=2)
+    {
+ 	    if(left<dimen && list3[index] < list3[left])
+     	{
+    	    temp=list3[index];
+ 		    list3[index]=list3[left];
+     	    list3[left]=temp;
+    	    index=-1; left=-1; right=0;
+	    }//end-if
+		
+		else if(right < dimen && list3[index] < list3[right])
+	    {
+		    temp = list3[index];
+			list3[index]=list3[right];
+		    list3[right]=temp;
+		    index=-1;left =-1;right=0;	
+	    }//end-else if
+	}//end-for
+    system("cls");
+
+    for(int count = 0; count < dimen; count++)
+	{
+	    cout<<"Arr["<<count+1<<"]: "<<list3[count]<<endl;
+	}//end-for
+    system("cls");
+}//end-void-getHeap
+        
+/////////////////////////////////// TRYAGAIN ///////////////////////////////////////////
+void tryAgain()
+{
+    //add code here
+    char ret_choice;     
+    do     
+    {         
+        cout<<"Do you want to try again?[y/n]:";         
+        cin>>ret_choice;     
+    }
+    while(ret_choice != 'y' && ret_choice != 'n');      
+    system("cls");
+
+    if (ret_choice == 'n')     
+    {         
+        cout<<"leaving the program now....\n";         
+        exit(0);     
+    }//end-if
+    system("cls"); 
+}//end-void-tryagain
